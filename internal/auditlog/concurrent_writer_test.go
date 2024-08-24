@@ -34,11 +34,12 @@ func TestConcurrentWriterNoop(t *testing.T) {
 }
 
 func TestConcurrentWriterFailsOnInit(t *testing.T) {
-	if runtime.GOOS == "windows" {
-		t.Skip()
-	}
 	config := NewConfig()
 	config.Target = "/unexisting.log"
+	if runtime.GOOS == "windows" {
+		// /unexisting.log will not fail on github actions
+		config.Target = "K:\\nonexisting.log"
+	}
 	config.Dir = t.TempDir()
 	config.FileMode = fs.FileMode(0777)
 	config.DirMode = fs.FileMode(0777)
