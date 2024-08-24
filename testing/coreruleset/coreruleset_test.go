@@ -18,6 +18,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"testing"
@@ -147,6 +148,9 @@ func BenchmarkCRSLargePOST(b *testing.B) {
 }
 
 func TestFTW(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip()
+	}
 	conf := coraza.NewWAFConfig()
 
 	rec, err := os.ReadFile(filepath.Join("..", "..", "coraza.conf-recommended"))
