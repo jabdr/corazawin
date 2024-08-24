@@ -34,7 +34,7 @@ jobs:
       - name: setup tinygo
         uses: acifani/setup-tinygo@b2ba42b249c7d3efdfe94166ec0f48b3191404f7 # v2
         with:
-          tinygo-version: '0.31.2'
+          tinygo-version: "0.31.2"
 
       - name: Cache TinyGo build
         uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
