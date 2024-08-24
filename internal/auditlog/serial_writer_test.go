@@ -11,6 +11,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 
@@ -56,6 +57,9 @@ func TestSerialLoggerSuccessOnInit(t *testing.T) {
 }
 
 func TestSerialWriterFailsOnInitForUnexistingFile(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip()
+	}
 	config := NewConfig()
 	config.Target = "/unexisting.log"
 	config.Dir = t.TempDir()
